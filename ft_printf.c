@@ -96,7 +96,41 @@ void	ft_put_unsigned(int n)
 	write(1, &buf[i], 10 - i);
 }
 
+int ft_put_low_hex(size_t nbr)
+{
+	int		i;
+	long	rm;
+	char	buff[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+	char	new_buff[16];
 
+	i = 16;
+	while (nbr != 0 && i > 0)
+	{
+		i--;
+		rm = nbr % 16;
+		new_buff[i] = buff[rm];
+		nbr /= 16;
+	}
+	write(1, &new_buff[i], 16 - i);
+}
+
+int ft_put_up_hex(size_t nbr)
+{
+	int		i;
+	long	rm;
+	char	buff[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+	char	new_buff[16];
+
+	i = 16;
+	while (nbr != 0 && i > 0)
+	{
+		i--;
+		rm = nbr % 16;
+		new_buff[i] = buff[rm];
+		nbr /= 16;
+	}
+	write(1, &new_buff[i], 16 - i);
+}
 
 int	ft_printf(const char *str, ...)
 {
@@ -115,14 +149,16 @@ int	ft_printf(const char *str, ...)
 				ft_put_char(va_arg(args, unsigned int));
 			else if (str[i + 1] == 's')
 				ft_put_str(va_arg(args, char *));
-			// else if (str[i] == 'p' || str[i] == 'x')
-			//   ft_put_low_hex(va_arg(args, size_t));
+			else if (str[i + 1] == 'x')
+				ft_put_low_hex(va_arg(args, size_t));
+			// else if (str[i + 1] == 'p')
+			// 	ft_put_low_hex(va_arg(args, size_t));
 			else if (str[i + 1] == 'd' || str[i + 1] == 'i')
 				ft_put_nbr(va_arg(args, int));
 			else if (str[i + 1] == 'u')
 				ft_put_unsigned(va_arg(args, unsigned int));
-			// else if (str[i] == 'X')
-			//   ft_put_up_hex(va_arg(args, size_t));
+			else if (str[i + 1] == 'X')
+			  ft_put_up_hex(va_arg(args, size_t));
 			// else if (str[i] == '%')
 			//   ft_put_char('%');
 			i++;
@@ -138,10 +174,17 @@ int	ft_printf(const char *str, ...)
 
 int main()
 {
-	int i = -242;
-	// unsigned int i = -1;
-	printf("sjacvh asjgccbyuv %u % d %c d", -545, 's');
+	// char *ptr = "hell jhvo";
+	// printf("sjacvh asjgccbyuv %p d %c d", ptr, 's');
+	// ft_put_low_hex(5131);
+
 	printf("\n###\n");
-	ft_printf("sjacvh asjgccbyuv %u % d %c d", -545, 's');
+	int i = 45;
+	int *ptr = &i;
+	printf("%p", ptr);
+	printf("\n###\n");
+	// ft_printf("sjacvh asjgccbyuv %x d %c d", 5131, 's');
+	ft_printf("%X", 5131);
+	printf("\n###\n");
 	return (0);
 }
