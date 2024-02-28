@@ -76,7 +76,7 @@ void	ft_put_nbr(int n)
 	write(1, &buf[i], 10 - i);
 }
 
-void	ft_put_unsigned(int n)
+void	ft_put_nbr_unsigned(int n)
 {
 	int		i;
 	char	buf[10];
@@ -132,6 +132,16 @@ int ft_put_up_hex(size_t nbr)
 	write(1, &new_buff[i], 16 - i);
 }
 
+int	ft_put_ptr(unsigned long long ptr)
+{
+	int	res;
+
+	res = 0;
+	res += ft_put_str("0x");
+	res += ft_put_low_hex(ptr);
+	return (res);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	int		i;
@@ -151,15 +161,15 @@ int	ft_printf(const char *str, ...)
 				ft_put_str(va_arg(args, char *));
 			else if (str[i + 1] == 'x')
 				ft_put_low_hex(va_arg(args, size_t));
-			// else if (str[i + 1] == 'p')
-			// 	ft_put_low_hex(va_arg(args, size_t));
+			else if (str[i + 1] == 'X')
+			  ft_put_up_hex(va_arg(args, size_t));
+			else if (str[i + 1] == 'p')
+				ft_put_ptr(va_arg(args, unsigned long long));
 			else if (str[i + 1] == 'd' || str[i + 1] == 'i')
 				ft_put_nbr(va_arg(args, int));
 			else if (str[i + 1] == 'u')
-				ft_put_unsigned(va_arg(args, unsigned int));
-			else if (str[i + 1] == 'X')
-			  ft_put_up_hex(va_arg(args, size_t));
-			// else if (str[i] == '%')
+				ft_put_nbr_unsigned(va_arg(args, unsigned int));
+			// else if (str[i + 1] == '%')
 			//   ft_put_char('%');
 			i++;
 		}
@@ -181,10 +191,10 @@ int main()
 	printf("\n###\n");
 	int i = 45;
 	int *ptr = &i;
-	printf("%p", ptr);
-	printf("\n###\n");
-	// ft_printf("sjacvh asjgccbyuv %x d %c d", 5131, 's');
-	ft_printf("%X", 5131);
-	printf("\n###\n");
+	// printf("%p", ptr);
+	// printf("\n###\n");
+	ft_printf("sjacvh asjgccbyuv % d %c d", , 's');
+	// ft_printf("%p", ptr);
+	// printf("\n###\n");
 	return (0);
 }
