@@ -1,45 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_nbr.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 20:55:44 by algaboya          #+#    #+#             */
-/*   Updated: 2024/02/26 20:57:57 by algaboya         ###   ########.fr       */
+/*   Created: 2024/02/28 21:04:52 by algaboya          #+#    #+#             */
+/*   Updated: 2024/02/28 21:05:11 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static long	ft_abs(long n)
-{
-	if (n < 0)
-		return (-n);
-	else
-		return (n);
-}
+#include "ft_printf.h"
 
-void	ft_put_nbr(int n)
+size_t	ft_strlen(const char *str)
 {
-	int		i;
-	long	nbr;
-	char	buf[10];
+	size_t	i;
 
-	if (n == 0)
-	{
-		write (1, "0", 1);
-		return ;
-	}
-	if (n < 0)
-	{
-		write(1, "-", 1);
-	}
-	nbr = ft_abs(n);
-	i = 10;
-	while (nbr != 0 && i > 0)
-	{
-		i--;
-		buf[i] = nbr % 10 + '0';
-		nbr /= 10;
-	}
-	write(1, &buf[i], 10 - i);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

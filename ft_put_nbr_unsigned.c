@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_unsigned.c                                  :+:      :+:    :+:   */
+/*   ft_put_nbr_unsigned.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:21:12 by algaboya          #+#    #+#             */
-/*   Updated: 2024/02/26 21:24:02 by algaboya         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:03:33 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_put_unsigned(int n)
+#include "ft_printf.h"
+
+int	ft_put_nbr_unsigned(int n)
 {
 	int		i;
 	char	buf[10];
@@ -18,7 +20,7 @@ void	ft_put_unsigned(int n)
 	if (n == 0)
 	{
 		write (1, "0", 1);
-		return ;
+		return (1);
 	}
 	i = 10;
 	while (n != 0 && i > 0)
@@ -28,4 +30,5 @@ void	ft_put_unsigned(int n)
 		n /= 10;
 	}
 	write(1, &buf[i], 10 - i);
+	return (16 - i);
 }
