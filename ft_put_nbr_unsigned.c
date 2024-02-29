@@ -6,13 +6,13 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:21:12 by algaboya          #+#    #+#             */
-/*   Updated: 2024/02/28 21:03:33 by algaboya         ###   ########.fr       */
+/*   Updated: 2024/02/29 21:10:07 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_put_nbr_unsigned(int n)
+int	ft_put_nbr_unsigned(unsigned long n)
 {
 	int		i;
 	char	buf[10];
@@ -30,5 +30,5 @@ int	ft_put_nbr_unsigned(int n)
 		n /= 10;
 	}
 	write(1, &buf[i], 10 - i);
-	return (16 - i);
+	return (10 - i);
 }

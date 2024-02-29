@@ -12,53 +12,43 @@
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 int	ft_printf(const char *str, ...)
 {
 	int		i;
-	int		y;
 	va_list	args;
+	int		z;
 
 	va_start(args, str);
 	i = 0;
-	y = ft_strlen((char *) str);
-	while (i < y)
+	z = 0;
+	while (str[i])
 	{
 		if (str[i] == '%')
 		{
 			if (str[i + 1] == 'c')
-				ft_put_char(va_arg(args, unsigned int));
+				z += ft_put_char(va_arg(args, unsigned int));
 			else if (str[i + 1] == 's')
-				ft_put_str(va_arg(args, char *));
+				z += ft_put_str(va_arg(args, char *));
 			else if (str[i + 1] == 'x')
-				ft_put_low_hex(va_arg(args, size_t));
+				z += ft_put_low_hex(va_arg(args, unsigned long long));
 			else if (str[i + 1] == 'X')
-				ft_put_up_hex(va_arg(args, size_t));
+				z += ft_put_up_hex(va_arg(args, unsigned long long));
 			else if (str[i + 1] == 'p')
-				ft_put_ptr(va_arg(args, unsigned long long));
+				z += ft_put_ptr(va_arg(args, unsigned long long));
 			else if (str[i + 1] == 'd' || str[i + 1] == 'i')
-				ft_put_nbr(va_arg(args, int));
+				z += ft_put_nbr(va_arg(args, int));
 			else if (str[i + 1] == 'u')
-				ft_put_nbr_unsigned(va_arg(args, unsigned int));
+				z += ft_put_nbr_unsigned(va_arg(args, unsigned long));
 			else if (str[i] == '%')
-				ft_put_char('%');
+				z += ft_put_char('%');
 			i++;
 		}
 		else
-			ft_put_char(str[i]);
+			z += ft_put_char(str[i]);
 		i++;
 	}
 	va_end(args);
-	return (0);
+	return (z);
 }
 
 

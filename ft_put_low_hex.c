@@ -12,15 +12,20 @@
 
 #include "ft_printf.h"
 
-int	ft_put_low_hex(size_t nbr)
+int	ft_put_low_hex(unsigned long long nbr)
 {
 	int		i;
 	long	rm;
 	char	*buff;
 	char	new_buff[16];
 
-	buff = "123456789abcdef";
+	buff = "0123456789abcdef";
 	i = 16;
+	if (nbr == 0)
+	{
+		write (1, "0", 1);
+		return (1);
+	}
 	while (nbr != 0 && i > 0)
 	{
 		i--;

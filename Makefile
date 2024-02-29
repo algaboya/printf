@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 FLAGS = -Wall -Wextra -Werror
-SRC = ft_printf.c ft_put_char.c ft_put_str.c ft_put_low_hex.c ft_put_up_hex.c ft_put_nbr.c ft_put_nbr_unsigned.c
+SRC = ft_printf.c ft_put_char.c ft_put_str.c ft_put_low_hex.c ft_put_up_hex.c ft_put_nbr.c ft_put_nbr_unsigned.c ft_put_ptr.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
