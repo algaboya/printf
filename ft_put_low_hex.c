@@ -14,25 +14,47 @@
 
 int	ft_put_low_hex(unsigned long long nbr)
 {
-	int		i;
-	long	rm;
 	char	*buff;
-	char	new_buff[16];
+	int		count;
 
+	// count = 0;
 	buff = "0123456789abcdef";
-	i = 16;
-	if (nbr == 0)
+	if(nbr < 16)
 	{
-		write (1, "0", 1);
-		return (1);
+		return (ft_put_char(buff[nbr]));
 	}
-	while (nbr != 0 && i > 0)
+	if (nbr >= 16)
 	{
-		i--;
-		rm = nbr % 16;
-		new_buff[i] = buff[rm];
-		nbr /= 16;
+		count = ft_put_low_hex(nbr / 16);
+		return (count + ft_put_low_hex(nbr % 16));
 	}
-	write(1, &new_buff[i], 16 - i);
-	return (16 - i);
+	return (0);
 }
+
+int main()
+{
+	int count = ft_put_low_hex(500);
+	printf("\n");
+	printf("%d", count);
+}
+	// int		i;
+	// long	rm;
+	// char	*buff;
+	// char	new_buff[16];
+
+	// buff = "0123456789abcdef";
+	// i = 16;
+	// if (nbr == 0)
+	// {
+	// 	write (1, "0", 1);
+	// 	return (1);
+	// }
+	// while (nbr != 0 && i > 0)
+	// {
+	// 	i--;
+	// 	rm = nbr % 16;
+	// 	new_buff[i] = buff[rm];
+	// 	nbr /= 16;
+	// }
+	// write(1, &new_buff[i], 16 - i);
+	// return (16 - i);
