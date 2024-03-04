@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:55:44 by algaboya          #+#    #+#             */
-/*   Updated: 2024/02/29 19:02:17 by algaboya         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:51:04 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,32 @@ static long	ft_abs(long n)
 		return (n);
 }
 
-int	ft_put_nbr(int n)
+static int	ft_sign(long n)
 {
-	int		m;
-	int		i;
-	long	nbr;
-	char	buf[10];
+	int	m;
 
 	m = 0;
-	if (n == 0)
-	{
-		write (1, "0", 1);
-		return (1);
-	}
 	if (n < 0)
 	{
 		write(1, "-", 1);
 		m = 1;
 	}
+	return (m);
+}
+
+int	ft_put_nbr(int n)
+{
+	int		k;
+	int		i;
+	long	nbr;
+	char	buf[10];
+
+	if (n == 0)
+	{
+		write (1, "0", 1);
+		return (1);
+	}
+	k = ft_sign(n);
 	nbr = ft_abs(n);
 	i = 10;
 	while (nbr != 0 && i > 0)
@@ -47,5 +55,5 @@ int	ft_put_nbr(int n)
 		nbr /= 10;
 	}
 	write(1, &buf[i], 10 - i);
-	return (10 - i + m);
+	return (10 - i + k);
 }

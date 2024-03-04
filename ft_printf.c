@@ -12,6 +12,30 @@
 
 #include "ft_printf.h"
 
+int	ft_sorting(char next, char symb, va_list args)
+{
+	int	k;
+
+	k = 0;
+	if (next == 'c')
+		k += ft_put_char(va_arg(args, unsigned int));
+	else if (next == 's')
+		k += ft_put_str(va_arg(args, char *));
+	else if (next == 'x')
+		k += ft_put_low_hex(va_arg(args, unsigned int));
+	else if (next == 'X')
+		k += ft_put_up_hex(va_arg(args, unsigned int));
+	else if (next == 'p')
+		k += ft_put_ptr(va_arg(args, unsigned long long));
+	else if (next == 'd' || next == 'i')
+		k += ft_put_nbr(va_arg(args, int));
+	else if (next == 'u')
+		k += ft_put_nbr_unsigned(va_arg(args, unsigned int));
+	else if (symb == '%')
+		k += ft_put_char('%');
+	return (k);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	int		i;
@@ -25,22 +49,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			if (str[i + 1] == 'c')
-				z += ft_put_char(va_arg(args, unsigned int));
-			else if (str[i + 1] == 's')
-				z += ft_put_str(va_arg(args, char *));
-			else if (str[i + 1] == 'x')
-				z += ft_put_low_hex(va_arg(args, unsigned long long));
-			else if (str[i + 1] == 'X')
-				z += ft_put_up_hex(va_arg(args, unsigned long long));
-			else if (str[i + 1] == 'p')
-				z += ft_put_ptr(va_arg(args, unsigned long long));
-			else if (str[i + 1] == 'd' || str[i + 1] == 'i')
-				z += ft_put_nbr(va_arg(args, int));
-			else if (str[i + 1] == 'u')
-				z += ft_put_nbr_unsigned(va_arg(args, unsigned long));
-			else if (str[i] == '%')
-				z += ft_put_char('%');
+			z += ft_sorting(str[i + 1], str[i], args);
 			i++;
 		}
 		else
@@ -50,7 +59,6 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (z);
 }
-
 
 // int main()
 // {

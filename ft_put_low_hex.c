@@ -1,60 +1,34 @@
 /* ************************************************************************** */
-/*                                                                          */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_put_low_hex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:56:20 by algaboya          #+#    #+#             */
-/*   Updated: 2024/02/26 20:08:40 by algaboya         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:44:05 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_put_low_hex(unsigned long long nbr)
+int	ft_put_low_hex(unsigned int nbr)
 {
-	char	*buff;
-	int		count;
+	char			*buff;
+	unsigned int	count;
 
-	// count = 0;
+	count = 0;
 	buff = "0123456789abcdef";
-	if(nbr < 16)
+	if (nbr < 16)
 	{
-		return (ft_put_char(buff[nbr]));
+		count += ft_put_char(buff[nbr]);
+		return (count);
 	}
 	if (nbr >= 16)
 	{
-		count = ft_put_low_hex(nbr / 16);
-		return (count + ft_put_low_hex(nbr % 16));
+		count += ft_put_low_hex(nbr / 16);
+		count += ft_put_low_hex(nbr % 16);
+		return (count);
 	}
 	return (0);
 }
-
-int main()
-{
-	int count = ft_put_low_hex(500);
-	printf("\n");
-	printf("%d", count);
-}
-	// int		i;
-	// long	rm;
-	// char	*buff;
-	// char	new_buff[16];
-
-	// buff = "0123456789abcdef";
-	// i = 16;
-	// if (nbr == 0)
-	// {
-	// 	write (1, "0", 1);
-	// 	return (1);
-	// }
-	// while (nbr != 0 && i > 0)
-	// {
-	// 	i--;
-	// 	rm = nbr % 16;
-	// 	new_buff[i] = buff[rm];
-	// 	nbr /= 16;
-	// }
-	// write(1, &new_buff[i], 16 - i);
-	// return (16 - i);
