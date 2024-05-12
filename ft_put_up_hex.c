@@ -32,25 +32,3 @@ int	ft_put_up_hex(unsigned long int nbr)
 	}
 	return (0);
 }
-
-	// int		i;
-	// long	rm;
-	// char	*buff;
-	// char	new_buff[16];
-
-	// buff = "0123456789ABCDEF";
-	// i = 16;
-	// if (nbr == 0)
-	// {
-	// 	write (1, "0", 1);
-	// 	return (1);
-	// }
-	// while (nbr != 0 && i > 0)
-	// {
-	// 	i--;
-	// 	rm = nbr % 16;
-	// 	new_buff[i] = buff[rm];
-	// 	nbr /= 16;
-	// }
-	// write(1, &new_buff[i], 16 - i);
-	// return (16 - i);
