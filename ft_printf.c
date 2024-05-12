@@ -31,7 +31,7 @@ int	ft_sorting(char next, char symb, va_list args)
 		k += ft_put_nbr(va_arg(args, int));
 	else if (next == 'u')
 		k += ft_put_nbr_unsigned(va_arg(args, unsigned int));
-	else if (symb == '%')
+	else if (next == '%')
 		k += ft_put_char('%');
 	return (k);
 }
@@ -59,20 +59,3 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (z);
 }
-
-// int main()
-// {
-// 	// char *ptr = "hell jhvo";
-// 	// printf("sjacvh asjgccbyuv %p d %c d", ptr, 's');
-// 	// ft_put_low_hex(5131);
-
-// 	printf("\n###\n");
-// 	int i = 45;
-// 	int *ptr = &i;
-// 	printf("%p   %    c", ptr, 'h');
-// 	printf("\n###\n");
-// 	ft_printf("sjacvh asjg% byuv %p %c d", ptr, 's');
-// 	// ft_printf("%p", ptr);
-// 	// printf("\n###\n");
-// 	return (0);
-// }
